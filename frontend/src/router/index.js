@@ -7,6 +7,7 @@ import header from '@/components/header'
 import main from '@/components/main'
 import product_page from "@/components/product_page"
 import footer from '@/components/footer'
+import cart from "@/components/cart";
 
 Vue.component('app-authorization', authorization)
 Vue.component('app-product', product)
@@ -14,6 +15,7 @@ Vue.component('app-header', header)
 Vue.component('app-main', main)
 Vue.component('app-product_page', product_page)
 Vue.component('app-footer', footer)
+Vue.component('app-cart', cart)
 Vue.use(VueRouter)
 
 const routes = [

@@ -6,36 +6,68 @@
             src="../assets/images/gnome.png" alt="auto"
         />
       </div>
-      <h2>Авторизация</h2>
+      <h2>{{this.info}}</h2>
       <form>
         <div class="user-box">
-          <input type="text" name="" required=""/>
+          <input type="text" v-model="username" name="" required=""/>
           <label><i class="Username"></i>
             Почта или логин
           </label>
         </div>
         <div class="user-box">
-          <input type="password" name="" required=""/>
+          <input type="password" v-model="password" name="" required=""/>
           <label><i class="Unlock"></i>
             Пароль
           </label>
         </div>
       </form>
-      <router-link :to="{name: 'main'}">
-        <button type="submit" class = "submit-button">Вход</button>
-      </router-link>
+        <button type="submit" class="submit-button" @click = authorization()>Вход</button>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: "authorization",
+    name: "authorization",
+    data() {
+        return {
+            userId: null,
+            username: null,
+            password: null,
+            info: 'Авторизация',
+            correct: false
+        }
+    },
+    methods: {
+        authorization(){
+            const params = {
+                name: this.username, password: this.password
+            }
+            this.$http.post('/user', params)
+                .then(response => this.checkCorrect(response.data.userId))
 
-
-  beforeCreate: function () {
-    document.body.className = 'intro';
-  }
+        },
+        checkCorrect(data){
+            if(data !== -1)
+            {
+                this.userId = data
+                this.correct = true
+                this.$router.push('main')
+                this.info = "Успешная авторизация"
+                localStorage.userId = this.userId;
+            }
+            else
+            {
+                this.info = "Ошибка авторизации, повторите попытку"
+            }
+            console.log(this.correct)
+        }
+    },
+    mounted(){
+        if (localStorage.userId) {
+            this.userId = localStorage.userId;
+        }
+    }
 }
 </script>
 

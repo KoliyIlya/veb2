@@ -7,7 +7,7 @@
 
     <img src = "../assets/images/gnome.png" alt ="" />
 
-    <nav><a href="https://www.ozon.ru/seller/fabrika-uspeha-65590/sadovyy-dekor-14715/keramika-ruchnoy-raboty-140549789/?miniapp=seller_65590"> <h2>О нас</h2>  </a> <a href="#"><h2>Корзина</h2>  </a></nav>
+    <nav><a href="https://www.ozon.ru/seller/fabrika-uspeha-65590/sadovyy-dekor-14715/keramika-ruchnoy-raboty-140549789/?miniapp=seller_65590"> <h2>О нас</h2>  </a> <a href="#"><h2>Корзина<app-cart></app-cart></h2>  </a></nav>
 
   </header>
 </template>

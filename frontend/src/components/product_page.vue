@@ -24,7 +24,7 @@
                 {{product.price}} ₽
               </div>
             </div>
-            <a href="#" class="btn"><span class="text">Добавить в корзину</span></a>
+              <a @click = "addToCart(product)" class="btn"><span class="text">Добавить в корзину</span></a>
 
           </div>
         </div>
@@ -43,21 +43,26 @@
 </template>
 
 <script>
-import product from "@/components/product";
-
 export default {
-  name: "item_page",
-  props: {
-    product: product,
-    id: String
-  },
-  beforeCreate: function() {
-    document.body.className = 'item_page';
-  },
-  created() {
-    this.id = this.$route.params.id
-    this.product = this.$route.params.product
-  }
+    name: "product_page",
+    methods: {
+        addToCart(product){
+            const params = {
+                id: product.id, count: 1, userId: localStorage.userId
+            }
+            this.$http.post('/cart', params)
+        }
+    },
+    data() {
+        return {
+            product: null
+        }
+    },
+    created() {
+        const id = this.$route.params.id
+        this.$http.get('/products/' + id)
+            .then(response => this.product = response.data)
+    }
 }
 </script>
 
